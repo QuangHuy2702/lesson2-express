@@ -2,12 +2,22 @@ var express = require('express');
 var app = express();
 var port = 3000;
 
-app.get('/', function(req, res){
-	res.send('<h1>Hello my name is Huy<h1><a href="/users">User List<a>');
-});
+app.set('view engine', 'pug');
+app.set('views', './views');
 
+app.get('/', function(req, res){
+	res.render('index', {
+		name: 'Huy',
+	});
+});
 app.get('/users', function(req, res){
-	res.send('User list');
+	res.render('./users/index', {
+		users: [
+		{name: 'coffee'},
+		{name: 'bread'},
+		{name: 'milk'}
+		],
+	});
 })
 
 app.listen(port , function(){
